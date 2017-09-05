@@ -1,0 +1,36 @@
+{
+    "family": "launch-test-app",
+    "containerDefinitions": [
+        {
+            "image": "750037626691.dkr.ecr.ap-southeast-1.amazonaws.com/service-disc:latest",
+            "name": "bwce-service-disc",
+            "cpu": 10,
+            "memory": 512,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8088
+                }
+            ],
+            "environment": [
+                {
+                    "name": "BW_LOGLEVEL",
+                    "value": "DEBUG"
+                },
+                {
+                    "name": "CONSUL_SERVER_URL",
+                    "value": "http://104.196.10.30/"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "bwce-app-log",
+                    "awslogs-region": "ap-southeast-1",
+                    "awslogs-stream-prefix": "bwce"
+                }
+	    }
+        }
+    ]
+}
